@@ -1,12 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
-import Stripe from "stripe";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2026-03-25.dahlia",
-});
 
 export async function POST(req: NextRequest) {
   try {
+    const stripeKey = process.env.STRIPE_SECRET_KEY;
+
+    if (!stripeKey) {
+      return NextResponse.json(
+        { error: "Stripe n'est pas configuré pour le moment." },
+        { status: 503 }
+      );
+    }
+
+    const Stripe = (await import("stripe")).default;
+    const stripe = new Stripe(stripeKey, {
+      apiVersion: "2026-03-25.dahlia",
+    });
+
     const { items } = await req.json();
 
     if (!items || items.length === 0) {

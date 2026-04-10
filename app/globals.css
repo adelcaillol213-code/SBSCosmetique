@@ -1,63 +1,84 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-@layer base {
-  :root {
-    --background: 43 33% 97%;
-    --foreground: 30 15% 15%;
-    --card: 43 30% 95%;
-    --card-foreground: 30 15% 15%;
-    --popover: 43 30% 95%;
-    --popover-foreground: 30 15% 15%;
-    --primary: 142 35% 28%;
-    --primary-foreground: 43 33% 97%;
-    --secondary: 43 25% 88%;
-    --secondary-foreground: 30 15% 15%;
-    --muted: 43 20% 90%;
-    --muted-foreground: 30 10% 45%;
-    --accent: 43 25% 88%;
-    --accent-foreground: 30 15% 15%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 43 33% 97%;
-    --border: 43 20% 85%;
-    --input: 43 20% 85%;
-    --ring: 142 35% 28%;
-    --radius: 1rem;
-  }
-
-  .dark {
-    --background: 30 15% 8%;
-    --foreground: 43 25% 92%;
-    --card: 30 12% 11%;
-    --card-foreground: 43 25% 92%;
-    --popover: 30 12% 11%;
-    --popover-foreground: 43 25% 92%;
-    --primary: 142 30% 45%;
-    --primary-foreground: 30 15% 8%;
-    --secondary: 30 10% 18%;
-    --secondary-foreground: 43 25% 92%;
-    --muted: 30 10% 18%;
-    --muted-foreground: 43 15% 60%;
-    --accent: 30 10% 18%;
-    --accent-foreground: 43 25% 92%;
-    --destructive: 0 62% 40%;
-    --destructive-foreground: 43 25% 92%;
-    --border: 30 10% 20%;
-    --input: 30 10% 20%;
-    --ring: 142 30% 45%;
-  }
+:root {
+  --background: #f7f3ee;
+  --foreground: #2c2416;
+  --card: #f2ece3;
+  --card-foreground: #2c2416;
+  --primary: #3a6b3a;
+  --primary-foreground: #f7f3ee;
+  --secondary: #e8ddc8;
+  --secondary-foreground: #2c2416;
+  --muted: #e0d5c0;
+  --muted-foreground: #7a6a50;
+  --accent: #e8ddc8;
+  --accent-foreground: #2c2416;
+  --destructive: #c0392b;
+  --destructive-foreground: #f7f3ee;
+  --border: #d5c9b0;
+  --input: #d5c9b0;
+  --ring: #3a6b3a;
+  --radius: 1rem;
 }
 
-@layer base {
-  * {
-    border-color: hsl(var(--border));
-  }
-  body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-    font-family: 'DM Sans', sans-serif;
-  }
-  h1, h2, h3, h4 {
-    font-family: 'Playfair Display', serif;
-  }
+.dark {
+  --background: #1a1510;
+  --foreground: #f0e8d8;
+  --card: #221e16;
+  --card-foreground: #f0e8d8;
+  --primary: #5a9a5a;
+  --primary-foreground: #1a1510;
+  --secondary: #2e2820;
+  --secondary-foreground: #f0e8d8;
+  --muted: #2e2820;
+  --muted-foreground: #a09070;
+  --accent: #2e2820;
+  --accent-foreground: #f0e8d8;
+  --destructive: #c0392b;
+  --destructive-foreground: #f0e8d8;
+  --border: #3a3020;
+  --input: #3a3020;
+  --ring: #5a9a5a;
 }
+
+* {
+  border-color: var(--border);
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'DM Sans', sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+}
+
+.bg-background { background-color: var(--background) !important; }
+.bg-card { background-color: var(--card) !important; }
+.bg-primary { background-color: var(--primary) !important; }
+.bg-secondary { background-color: var(--secondary) !important; }
+.bg-muted { background-color: var(--muted) !important; }
+.bg-accent { background-color: var(--accent) !important; }
+.bg-destructive { background-color: var(--destructive) !important; }
+.bg-foreground { background-color: var(--foreground) !important; }
+.bg-border { background-color: var(--border) !important; }
+
+.text-foreground { color: var(--foreground) !important; }
+.text-background { color: var(--background) !important; }
+.text-primary { color: var(--primary) !important; }
+.text-primary-foreground { color: var(--primary-foreground) !important; }
+.text-muted-foreground { color: var(--muted-foreground) !important; }
+.text-secondary-foreground { color: var(--secondary-foreground) !important; }
+.text-destructive { color: var(--destructive) !important; }
+.text-card-foreground { color: var(--card-foreground) !important; }
+.text-accent-foreground { color: var(--accent-foreground) !important; }
+
+.border-border { border-color: var(--border) !important; }
+.border-primary { border-color: var(--primary) !important; }
+.border-input { border-color: var(--input) !important; }
+
+.ring-primary { --tw-ring-color: var(--primary) !important; }

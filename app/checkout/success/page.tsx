@@ -1,17 +1,33 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useCart } from "@/hooks/useCart";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { CheckCircle, ArrowRight, ShoppingBag } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 export default function SuccessPage() {
-  const { clearCart } = useCart();
+  const { clearCart, items } = useCart();
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get("session_id");
+  const emailSent = useRef(false);
 
   useEffect(() => {
+    if (emailSent.current) return;
+    emailSent.current = true;
+
     clearCart();
+
+    // Envoie l'email de confirmation
+    if (sessionId) {
+      fetch("/api/checkout/confirm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId }),
+      }).catch(console.error);
+    }
   }, []);
 
   return (
@@ -30,14 +46,11 @@ export default function SuccessPage() {
         </h1>
 
         <p className="text-lg text-muted-foreground mb-8">
-          Merci pour votre achat. Vous recevrez un email de confirmation
-          sous peu avec les détails de votre commande.
+          Merci pour votre achat. Un email de confirmation vous a été envoyé.
         </p>
 
         <div className="bg-card border border-border rounded-2xl p-6 mb-8 text-left">
-          <h2 className="font-semibold text-foreground mb-3">
-            Prochaines étapes
-          </h2>
+          <h2 className="font-semibold text-foreground mb-3">Prochaines étapes</h2>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li className="flex items-center gap-2">
               <span className="w-6 h-6 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>

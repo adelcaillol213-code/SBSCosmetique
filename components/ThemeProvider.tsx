@@ -1,31 +1,61 @@
 "use client";
 
 import * as React from "react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+
+type Theme = "light" | "dark" | "system";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
 };
 
+type ThemeContextType = {
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+};
+
+const ThemeContext = React.createContext<ThemeContextType>({
+  theme: "system",
+  setTheme: () => {},
+});
+
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [mounted, setMounted] = React.useState(false);
+  const [theme, setThemeState] = React.useState<Theme>("light");
 
   React.useEffect(() => {
-    setMounted(true);
+    const stored = localStorage.getItem("theme") as Theme | null;
+    if (stored) {
+      setThemeState(stored);
+      applyTheme(stored);
+    } else {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const initial = prefersDark ? "dark" : "light";
+      setThemeState(initial);
+      applyTheme(initial);
+    }
   }, []);
 
-  if (!mounted) {
-    return <>{children}</>;
+  function applyTheme(t: Theme) {
+    const root = document.documentElement;
+    if (t === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+  }
+
+  function setTheme(t: Theme) {
+    setThemeState(t);
+    localStorage.setItem("theme", t);
+    applyTheme(t);
   }
 
   return (
-    <NextThemesProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
-    </NextThemesProvider>
+    </ThemeContext.Provider>
   );
+}
+
+export function useTheme() {
+  return React.useContext(ThemeContext);
 }

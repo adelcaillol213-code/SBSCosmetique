@@ -1,7 +1,7 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
+import { useTheme } from "./ThemeProvider";
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
@@ -10,9 +10,7 @@ export default function ThemeToggle() {
 
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) {
-    return <div className="w-9 h-9" />;
-  }
+  if (!mounted) return <div className="w-9 h-9" />;
 
   return (
     <button

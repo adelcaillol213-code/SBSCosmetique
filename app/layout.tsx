@@ -8,13 +8,14 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "LuxeShop — Boutique Premium",
-  description: "Découvrez notre collection de produits premium. Livraison rapide, retours gratuits.",
-  keywords: ["boutique", "ecommerce", "mode", "accessoires", "premium"],
+  title: "SBS Cosmétique — Beauté Naturelle & Bio",
+  description: "Découvrez notre gamme de cosmétiques naturels et biologiques. Livraison gratuite dès 50€, retours gratuits sous 30 jours.",
+  keywords: ["cosmétique", "bio", "naturel", "beauté", "soin", "cruelty-free"],
   openGraph: {
-    title: "LuxeShop — Boutique Premium",
-    description: "Découvrez notre collection de produits premium.",
+    title: "SBS Cosmétique — Beauté Naturelle & Bio",
+    description: "Découvrez notre gamme de cosmétiques naturels et biologiques.",
     type: "website",
+    url: "https://sbs-cosmestique.vercel.app",
   },
 };
 

@@ -3,10 +3,18 @@
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Settings } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function AdminButton() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const [mounted, setMounted] = useState(false);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Attend que le composant soit monté ET que la session soit chargée
+  if (!mounted || status === "loading") return null;
   if (!session || (session.user as any)?.role !== "admin") return null;
 
   return (

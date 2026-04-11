@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import { ShoppingCart, User, Menu, X } from "lucide-react";
+import { ShoppingCart, User, Menu, X, Settings } from "lucide-react";
 import { useState, useEffect } from "react";
-import AdminButton from "./AdminButton";
 import ThemeToggle from "./ThemeToggle";
 
 function CartBadge() {
@@ -34,8 +33,10 @@ function CartBadge() {
     <Link href="/cart" className="relative p-2 hover:opacity-70 transition">
       <ShoppingCart className="w-5 h-5" />
       {count > 0 && (
-        <span className="absolute -top-1 -right-1 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"
-          style={{ backgroundColor: "var(--gold)", color: "var(--foreground)" }}>
+        <span
+          className="absolute -top-1 -right-1 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"
+          style={{ backgroundColor: "var(--gold)", color: "var(--foreground)" }}
+        >
           {count}
         </span>
       )}
@@ -44,24 +45,29 @@ function CartBadge() {
 }
 
 export default function Header() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return (
-    <header className={[
-      "sticky top-0 z-50 transition-all duration-500",
-      scrolled
-        ? "bg-background/95 backdrop-blur-md shadow-sm border-b border-border"
-        : "bg-transparent",
-    ].join(" ")}>
+  const isAdmin = mounted && status !== "loading" && (session?.user as any)?.role === "admin";
 
+  return (
+    <header
+      className={[
+        "sticky top-0 z-50 transition-all duration-500",
+        scrolled
+          ? "bg-background/95 backdrop-blur-md shadow-sm border-b border-border"
+          : "bg-transparent",
+      ].join(" ")}
+    >
       {/* Gold top bar */}
       <div className="gold-divider" />
 
@@ -70,12 +76,16 @@ export default function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex flex-col items-start">
-            <span className="font-serif text-2xl font-bold tracking-widest text-foreground"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+            <span
+              className="font-serif text-2xl font-bold tracking-widest text-foreground"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            >
               SBS
             </span>
-            <span className="text-xs tracking-[0.3em] uppercase font-light"
-              style={{ color: "var(--gold)" }}>
+            <span
+              className="text-xs tracking-[0.3em] uppercase font-light"
+              style={{ color: "var(--gold)" }}
+            >
               Cosmétique
             </span>
           </Link>
@@ -89,7 +99,7 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
-                className="text-xs tracking-[0.2em] uppercase font-medium text-muted-foreground hover:text-foreground transition-colors duration-300"
+                className="nav-link text-xs tracking-[0.2em] uppercase font-medium text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
                 {label}
               </Link>
@@ -97,45 +107,64 @@ export default function Header() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-3">
-            <AdminButton />
+          <div className="flex items-center gap-2">
+
+            {/* Bouton Admin — visible uniquement pour les admins */}
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="hidden md:flex items-center gap-2 px-4 py-2 text-xs tracking-widest uppercase font-medium transition-all duration-300 btn-gold"
+                style={{
+                  backgroundColor: "var(--gold)",
+                  color: "var(--foreground)",
+                }}
+              >
+                <Settings className="w-3 h-3" />
+                Admin
+              </Link>
+            )}
+
             <ThemeToggle />
             <CartBadge />
 
-            {session ? (
-              <div className="hidden md:flex items-center gap-4">
-                <Link
-                  href="/account"
-                  className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground transition"
-                >
-                  <User className="w-4 h-4" />
-                  {session.user?.name?.split(" ")[0]}
-                </Link>
-                <button
-                  onClick={() => signOut()}
-                  className="text-xs tracking-widest uppercase px-4 py-2 border border-border hover:border-foreground transition-colors duration-300"
-                >
-                  Quitter
-                </button>
-              </div>
-            ) : (
-              <div className="hidden md:flex items-center gap-3">
-                <Link
-                  href="/login"
-                  className="text-xs tracking-widest uppercase px-4 py-2 border border-border hover:border-foreground transition-colors duration-300"
-                >
-                  Connexion
-                </Link>
-                <Link
-                  href="/register"
-                  className="text-xs tracking-widest uppercase px-5 py-2 text-primary-foreground hover:opacity-90 transition"
-                  style={{ backgroundColor: "var(--primary)" }}
-                >
-                  S'inscrire
-                </Link>
-              </div>
+            {/* Session — desktop */}
+            {mounted && status !== "loading" && (
+              session ? (
+                <div className="hidden md:flex items-center gap-3">
+                  <Link
+                    href="/account"
+                    className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground transition"
+                  >
+                    <User className="w-4 h-4" />
+                    {session.user?.name?.split(" ")[0]}
+                  </Link>
+                  <button
+                    onClick={() => signOut()}
+                    className="text-xs tracking-widest uppercase px-4 py-2 border border-border hover:border-foreground transition-colors duration-300"
+                  >
+                    Quitter
+                  </button>
+                </div>
+              ) : (
+                <div className="hidden md:flex items-center gap-3">
+                  <Link
+                    href="/login"
+                    className="text-xs tracking-widest uppercase px-4 py-2 border border-border hover:border-foreground transition-colors duration-300"
+                  >
+                    Connexion
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="text-xs tracking-widest uppercase px-5 py-2 text-primary-foreground hover:opacity-90 transition"
+                    style={{ backgroundColor: "var(--primary)" }}
+                  >
+                    S'inscrire
+                  </Link>
+                </div>
+              )
             )}
 
+            {/* Mobile menu button */}
             <button
               className="md:hidden p-2 hover:opacity-70 transition"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -151,19 +180,45 @@ export default function Header() {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden py-6 border-b border-border bg-background space-y-4 px-8">
-          <Link href="/" className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2" onClick={() => setMenuOpen(false)}>Accueil</Link>
-          <Link href="/shop" className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2" onClick={() => setMenuOpen(false)}>Boutique</Link>
-          <Link href="/cart" className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2" onClick={() => setMenuOpen(false)}>Panier</Link>
-          {session ? (
-            <>
-              <Link href="/account" className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2" onClick={() => setMenuOpen(false)}>Mon compte</Link>
-              <button onClick={() => signOut()} className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2">Déconnexion</button>
-            </>
-          ) : (
-            <>
-              <Link href="/login" className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2" onClick={() => setMenuOpen(false)}>Connexion</Link>
-              <Link href="/register" className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2" onClick={() => setMenuOpen(false)}>S'inscrire</Link>
-            </>
+          <Link href="/" className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2" onClick={() => setMenuOpen(false)}>
+            Accueil
+          </Link>
+          <Link href="/shop" className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2" onClick={() => setMenuOpen(false)}>
+            Boutique
+          </Link>
+          <Link href="/cart" className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2" onClick={() => setMenuOpen(false)}>
+            Panier
+          </Link>
+
+          {isAdmin && (
+            <Link href="/admin" className="block text-xs tracking-widest uppercase py-2 font-medium" style={{ color: "var(--gold)" }} onClick={() => setMenuOpen(false)}>
+              ⚙️ Panel Admin
+            </Link>
+          )}
+
+          {mounted && status !== "loading" && (
+            session ? (
+              <>
+                <Link href="/account" className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2" onClick={() => setMenuOpen(false)}>
+                  Mon compte
+                </Link>
+                <button
+                  onClick={() => signOut()}
+                  className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2"
+                >
+                  Déconnexion
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2" onClick={() => setMenuOpen(false)}>
+                  Connexion
+                </Link>
+                <Link href="/register" className="block text-xs tracking-widest uppercase text-muted-foreground hover:text-foreground py-2" onClick={() => setMenuOpen(false)}>
+                  S'inscrire
+                </Link>
+              </>
+            )
           )}
         </div>
       )}

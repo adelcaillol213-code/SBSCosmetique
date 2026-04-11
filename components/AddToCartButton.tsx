@@ -30,9 +30,9 @@ export default function AddToCartButton({
     return (
       <button
         onClick={handleAdd}
-        className="btn-ripple w-full flex items-center justify-center gap-3 py-5 text-xs tracking-[0.3em] uppercase font-medium transition-all duration-300"
+        className="btn-ripple w-full flex items-center justify-center gap-3 py-4 text-xs tracking-[0.3em] uppercase font-light transition-all duration-300"
         style={added ? {
-          backgroundColor: "var(--gold)",
+          backgroundColor: "var(--mint)",
           color: "var(--foreground)",
         } : {
           backgroundColor: "var(--primary)",
@@ -40,7 +40,7 @@ export default function AddToCartButton({
         }}
       >
         <ShoppingCart className="w-4 h-4" />
-        {added ? "Ajouté au panier ✓" : "Ajouter au panier"}
+        {added ? "Ajouté ✓" : "Ajouter au panier"}
       </button>
     );
   }
@@ -48,9 +48,9 @@ export default function AddToCartButton({
   return (
     <button
       onClick={handleAdd}
-      className="flex items-center gap-2 px-4 py-2 text-xs tracking-widest uppercase font-medium transition-all duration-300 btn-ripple"
+      className="btn-ripple flex items-center gap-2 px-4 py-2 text-xs tracking-widest uppercase font-light transition-all duration-300"
       style={added ? {
-        backgroundColor: "var(--gold)",
+        backgroundColor: "var(--mint)",
         color: "var(--foreground)",
       } : {
         backgroundColor: "var(--primary)",
@@ -58,7 +58,7 @@ export default function AddToCartButton({
       }}
     >
       <ShoppingCart className="w-3 h-3" />
-      {added ? "Ajouté ✓" : "Ajouter"}
+      {added ? "✓" : "Ajouter"}
     </button>
   );
 }

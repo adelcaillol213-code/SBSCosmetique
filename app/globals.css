@@ -1,49 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Jost:wght@200;300;400;500&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #faf7f4;
-  --foreground: #1a0a0a;
-  --card: #f5f0eb;
-  --card-foreground: #1a0a0a;
-  --primary: #6b1a2a;
-  --primary-foreground: #faf7f4;
-  --secondary: #f0e8d8;
-  --secondary-foreground: #1a0a0a;
-  --muted: #e8ddd0;
-  --muted-foreground: #8a6a5a;
-  --accent: #c9a84c;
-  --accent-foreground: #1a0a0a;
+  --background: #f5f2ed;
+  --foreground: #2d4a3e;
+  --card: #eeebe4;
+  --card-foreground: #2d4a3e;
+  --primary: #2d4a3e;
+  --primary-foreground: #f5f2ed;
+  --secondary: #e8e0d5;
+  --secondary-foreground: #2d4a3e;
+  --muted: #e0d8cc;
+  --muted-foreground: #7a8c85;
+  --accent: #f0cfd4;
+  --accent-foreground: #2d4a3e;
   --destructive: #c0392b;
-  --destructive-foreground: #faf7f4;
-  --border: #e0d0c0;
-  --input: #e0d0c0;
-  --ring: #6b1a2a;
-  --gold: #c9a84c;
-  --gold-light: #e8c96a;
-  --radius: 0.5rem;
+  --destructive-foreground: #f5f2ed;
+  --border: #d8d0c4;
+  --input: #d8d0c4;
+  --ring: #2d4a3e;
+  --sage: #2d4a3e;
+  --sage-light: #5a7a6e;
+  --pink: #f0cfd4;
+  --mint: #c8e0d8;
+  --cream: #f5f2ed;
+  --radius: 0rem;
 }
 
 .dark {
-  --background: #0f0608;
-  --foreground: #f5ede0;
-  --card: #1a0c0e;
-  --card-foreground: #f5ede0;
-  --primary: #8b2a3a;
-  --primary-foreground: #f5ede0;
-  --secondary: #2a1a1a;
-  --secondary-foreground: #f5ede0;
-  --muted: #2a1a1a;
-  --muted-foreground: #a08070;
-  --accent: #c9a84c;
-  --accent-foreground: #0f0608;
+  --background: #1a2420;
+  --foreground: #f0ede8;
+  --card: #212e2a;
+  --card-foreground: #f0ede8;
+  --primary: #8ab4a8;
+  --primary-foreground: #1a2420;
+  --secondary: #2a3830;
+  --secondary-foreground: #f0ede8;
+  --muted: #2a3830;
+  --muted-foreground: #9ab0a8;
+  --accent: #3d2a2e;
+  --accent-foreground: #f0ede8;
   --destructive: #c0392b;
-  --destructive-foreground: #f5ede0;
-  --border: #3a2020;
-  --input: #3a2020;
-  --ring: #8b2a3a;
-  --gold: #c9a84c;
-  --gold-light: #e8c96a;
+  --destructive-foreground: #f0ede8;
+  --border: #2e3e38;
+  --input: #2e3e38;
+  --ring: #8ab4a8;
+  --sage: #8ab4a8;
+  --sage-light: #a8c8c0;
+  --pink: #3d2a2e;
+  --mint: #1e3028;
+  --cream: #1a2420;
 }
 
 * {
@@ -54,12 +60,14 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.02em;
 }
 
 h1, h2, h3, h4 {
   font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
 }
 
 .bg-background { background-color: var(--background) !important; }
@@ -86,60 +94,21 @@ h1, h2, h3, h4 {
 .border-primary { border-color: var(--primary) !important; }
 .border-input { border-color: var(--input) !important; }
 
-.ring-primary { --tw-ring-color: var(--primary) !important; }
-
-/* Gold accent */
-.text-gold { color: var(--gold) !important; }
-.bg-gold { background-color: var(--gold) !important; }
-.border-gold { border-color: var(--gold) !important; }
-
-/* Luxury divider */
-.gold-divider {
+/* Sage divider */
+.sage-divider {
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  background: linear-gradient(to right, transparent, var(--sage-light), transparent);
 }
+
+/* Pink accent */
+.bg-pink { background-color: var(--pink) !important; }
+.bg-mint { background-color: var(--mint) !important; }
+.text-sage { color: var(--sage) !important; }
 
 /* ── Animations ── */
-
-/* Boutons scale au hover */
-a, button {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Scale sur les boutons principaux */
-.btn-hover:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-}
-
-/* Underline animé sur les liens */
-.link-underline {
-  position: relative;
-}
-.link-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: var(--gold);
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.link-underline:hover::after {
-  width: 100%;
-}
-
-/* Fade in au chargement */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {
@@ -147,19 +116,9 @@ a, button {
   to { opacity: 1; }
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
-}
-
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 76, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(201, 168, 76, 0.6); }
 }
 
 .animate-fade-in-up {
@@ -174,11 +133,6 @@ a, button {
   animation: float 4s ease-in-out infinite;
 }
 
-.animate-glow {
-  animation: glow 2s ease-in-out infinite;
-}
-
-/* Délais d'animation */
 .delay-100 { animation-delay: 0.1s; opacity: 0; }
 .delay-200 { animation-delay: 0.2s; opacity: 0; }
 .delay-300 { animation-delay: 0.3s; opacity: 0; }
@@ -186,69 +140,31 @@ a, button {
 .delay-500 { animation-delay: 0.5s; opacity: 0; }
 .delay-600 { animation-delay: 0.6s; opacity: 0; }
 
-/* Gold shimmer text */
-.gold-shimmer {
-  background: linear-gradient(
-    90deg,
-    var(--gold) 0%,
-    #f5e6a3 40%,
-    var(--gold) 60%,
-    #c9a84c 100%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3s linear infinite;
-}
-
-/* Card hover élégant */
+/* Card hover */
 .card-hover {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(45, 74, 62, 0.08);
 }
 
 /* Image zoom */
-.img-zoom {
-  overflow: hidden;
-}
+.img-zoom { overflow: hidden; }
 .img-zoom img {
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.img-zoom:hover img {
-  transform: scale(1.08);
-}
+.img-zoom:hover img { transform: scale(1.05); }
 
-/* Bouton gold pulse */
-.btn-gold:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 30px rgba(201, 168, 76, 0.4);
-}
-
-/* Nav link hover */
-.nav-link {
-  position: relative;
-  padding-bottom: 4px;
-}
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
+/* Button hover */
+.btn-hover {
   transition: all 0.3s ease;
-  transform: translateX(-50%);
 }
-.nav-link:hover::after {
-  width: 100%;
+.btn-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(45, 74, 62, 0.2);
 }
 
-/* Ripple effect sur les boutons */
 .btn-ripple {
   position: relative;
   overflow: hidden;
@@ -260,7 +176,7 @@ a, button {
   left: 50%;
   width: 0;
   height: 0;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.15);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition: width 0.6s, height 0.6s;
@@ -268,4 +184,30 @@ a, button {
 .btn-ripple:hover::before {
   width: 300px;
   height: 300px;
+}
+
+/* Nav link */
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--sage);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+.nav-link:hover::after { width: 100%; }
+
+/* Step badge */
+.step-badge {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
 }

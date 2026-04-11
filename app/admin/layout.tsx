@@ -24,7 +24,7 @@ export default async function AdminLayout({
       <aside className="w-64 bg-card border-r border-border flex flex-col fixed h-full">
         <div className="p-6 border-b border-border">
           <h1 className="font-bold text-lg text-foreground">Panel Admin</h1>
-          <p className="text-xs text-muted-foreground mt-1">LuxeShop</p>
+          <p className="text-xs text-muted-foreground mt-1">SBS-Cosmétique</p>
         </div>
 
         <nav className="flex-1 p-4 space-y-1">

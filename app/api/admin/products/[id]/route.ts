@@ -9,17 +9,10 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-    console.log("Deleting product:", id);
-
     await db.delete(products).where(eq(products.id, Number(id)));
-
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    console.error("Delete error:", error);
-    return NextResponse.json(
-      { error: error.message },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 
@@ -30,7 +23,6 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await req.json();
-    console.log("Updating product:", id, body);
 
     await db
       .update(products)
@@ -47,10 +39,6 @@ export async function PUT(
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    console.error("Update error:", error);
-    return NextResponse.json(
-      { error: error.message },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

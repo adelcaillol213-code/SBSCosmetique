@@ -1,67 +1,81 @@
 import Link from "next/link";
-import { Leaf } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-foreground text-background mt-20">
+    <footer className="mt-20" style={{ backgroundColor: "var(--foreground)", color: "var(--background)" }}>
+
+      {/* Gold top line */}
+      <div className="gold-divider" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
 
           {/* Brand */}
-          <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                <Leaf className="w-4 h-4 text-primary-foreground" />
-              </div>
-              <span className="font-serif text-xl font-bold">SBS Cosmétique</span>
-            </Link>
-            <p className="text-background/60 text-sm leading-relaxed max-w-xs">
-              Des produits cosmétiques naturels et biologiques, formulés avec soin pour sublimer votre beauté au naturel.
-            </p>
-            <div className="flex gap-4 mt-6">
-              <a href="#" className="w-9 h-9 bg-background/10 rounded-full flex items-center justify-center hover:bg-background/20 transition text-sm font-bold">
-                ig
-              </a>
-              <a href="#" className="w-9 h-9 bg-background/10 rounded-full flex items-center justify-center hover:bg-background/20 transition text-sm font-bold">
-                fb
-              </a>
-              <a href="#" className="w-9 h-9 bg-background/10 rounded-full flex items-center justify-center hover:bg-background/20 transition text-sm font-bold">
-                tw
-              </a>
+          <div>
+            <div className="mb-6">
+              <p className="font-serif text-3xl font-bold tracking-widest"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                SBS
+              </p>
+              <p className="text-xs tracking-[0.4em] uppercase mt-1" style={{ color: "var(--gold)" }}>
+                Cosmétique
+              </p>
             </div>
+            <div className="gold-divider mb-6" />
+            <p className="text-xs leading-relaxed opacity-60 max-w-xs">
+              L'art de la beauté naturelle et luxueuse. Des soins d'exception formulés pour sublimer votre éclat au quotidien.
+            </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h3 className="font-semibold text-sm mb-4 text-background/80 uppercase tracking-wider">
+            <h3 className="text-xs tracking-[0.3em] uppercase mb-6 opacity-60">
               Navigation
             </h3>
-            <ul className="space-y-3">
-              <li><Link href="/" className="text-sm text-background/60 hover:text-background transition">Accueil</Link></li>
-              <li><Link href="/shop" className="text-sm text-background/60 hover:text-background transition">Boutique</Link></li>
-              <li><Link href="/cart" className="text-sm text-background/60 hover:text-background transition">Panier</Link></li>
+            <ul className="space-y-4">
+              {[
+                { href: "/", label: "Accueil" },
+                { href: "/shop", label: "Boutique" },
+                { href: "/cart", label: "Panier" },
+              ].map(({ href, label }) => (
+                <li key={href}>
+                  <Link href={href} className="text-xs tracking-widest uppercase opacity-60 hover:opacity-100 transition-opacity">
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Compte */}
           <div>
-            <h3 className="font-semibold text-sm mb-4 text-background/80 uppercase tracking-wider">
-              Compte
+            <h3 className="text-xs tracking-[0.3em] uppercase mb-6 opacity-60">
+              Mon Compte
             </h3>
-            <ul className="space-y-3">
-              <li><Link href="/login" className="text-sm text-background/60 hover:text-background transition">Connexion</Link></li>
-              <li><Link href="/register" className="text-sm text-background/60 hover:text-background transition">Inscription</Link></li>
-              <li><Link href="/account" className="text-sm text-background/60 hover:text-background transition">Mon compte</Link></li>
+            <ul className="space-y-4">
+              {[
+                { href: "/login", label: "Connexion" },
+                { href: "/register", label: "Inscription" },
+                { href: "/account", label: "Mon espace" },
+              ].map(({ href, label }) => (
+                <li key={href}>
+                  <Link href={href} className="text-xs tracking-widest uppercase opacity-60 hover:opacity-100 transition-opacity">
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-background/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-background/40">
-            © 2026 SBS Cosmétique — Tous droits réservés
+        <div className="gold-divider my-10" />
+
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs tracking-widest uppercase opacity-40">
+            © 2026 SBS Cosmétique
           </p>
-          <p className="text-sm text-background/40">
-            🌿 100% Naturel · 🐰 Cruelty-Free · ♻️ Éco-responsable
+          <p className="text-xs tracking-widest uppercase opacity-40">
+            Luxe · Naturel · Éthique
           </p>
         </div>
       </div>

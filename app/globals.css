@@ -1,44 +1,49 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap');
 
 :root {
-  --background: #e8d9c0;
-  --foreground: #2c1f0e;
-  --card: #e8dcc8;
-  --card-foreground: #2c1f0e;
-  --primary: #3a6b3a;
-  --primary-foreground: #f0e8d8;
-  --secondary: #ddd0b8;
-  --secondary-foreground: #2c1f0e;
-  --muted: #d8c9b0;
-  --muted-foreground: #7a5c3a;
-  --accent: #ddd0b8;
-  --accent-foreground: #2c1f0e;
+  --background: #faf7f4;
+  --foreground: #1a0a0a;
+  --card: #f5f0eb;
+  --card-foreground: #1a0a0a;
+  --primary: #6b1a2a;
+  --primary-foreground: #faf7f4;
+  --secondary: #f0e8d8;
+  --secondary-foreground: #1a0a0a;
+  --muted: #e8ddd0;
+  --muted-foreground: #8a6a5a;
+  --accent: #c9a84c;
+  --accent-foreground: #1a0a0a;
   --destructive: #c0392b;
-  --destructive-foreground: #f0e8d8;
-  --border: #c8b898;
-  --input: #c8b898;
-  --ring: #3a6b3a;
-  --radius: 1rem;
+  --destructive-foreground: #faf7f4;
+  --border: #e0d0c0;
+  --input: #e0d0c0;
+  --ring: #6b1a2a;
+  --gold: #c9a84c;
+  --gold-light: #e8c96a;
+  --radius: 0.5rem;
 }
+
 .dark {
-  --background: #1e1609;
-  --foreground: #ede0cc;
-  --card: #271c0e;
-  --card-foreground: #ede0cc;
-  --primary: #5a9a5a;
-  --primary-foreground: #1e1609;
-  --secondary: #332210;
-  --secondary-foreground: #ede0cc;
-  --muted: #332210;
-  --muted-foreground: #a07850;
-  --accent: #332210;
-  --accent-foreground: #ede0cc;
+  --background: #0f0608;
+  --foreground: #f5ede0;
+  --card: #1a0c0e;
+  --card-foreground: #f5ede0;
+  --primary: #8b2a3a;
+  --primary-foreground: #f5ede0;
+  --secondary: #2a1a1a;
+  --secondary-foreground: #f5ede0;
+  --muted: #2a1a1a;
+  --muted-foreground: #a08070;
+  --accent: #c9a84c;
+  --accent-foreground: #0f0608;
   --destructive: #c0392b;
-  --destructive-foreground: #ede0cc;
-  --border: #3d2a14;
-  --input: #3d2a14;
-  --ring: #5a9a5a;
+  --destructive-foreground: #f5ede0;
+  --border: #3a2020;
+  --input: #3a2020;
+  --ring: #8b2a3a;
+  --gold: #c9a84c;
+  --gold-light: #e8c96a;
 }
 
 * {
@@ -49,11 +54,12 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .bg-background { background-color: var(--background) !important; }
@@ -81,3 +87,14 @@ h1, h2, h3, h4 {
 .border-input { border-color: var(--input) !important; }
 
 .ring-primary { --tw-ring-color: var(--primary) !important; }
+
+/* Gold accent */
+.text-gold { color: var(--gold) !important; }
+.bg-gold { background-color: var(--gold) !important; }
+.border-gold { border-color: var(--gold) !important; }
+
+/* Luxury divider */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}

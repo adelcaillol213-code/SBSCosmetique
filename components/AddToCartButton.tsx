@@ -23,14 +23,17 @@ export default function AddToCartButton({ productId }: { productId: number }) {
   return (
     <button
       onClick={handleAdd}
-      className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition ${
-        added
-          ? "bg-green-500 text-white"
-          : "bg-primary text-primary-foreground hover:opacity-90"
-      }`}
+      className="flex items-center gap-2 px-4 py-2 text-xs tracking-widest uppercase font-medium transition-all duration-300"
+      style={added ? {
+        backgroundColor: "var(--gold)",
+        color: "var(--foreground)",
+      } : {
+        backgroundColor: "var(--primary)",
+        color: "var(--primary-foreground)",
+      }}
     >
-      <ShoppingCart className="w-4 h-4" />
-      {added ? "Ajouté !" : "Ajouter"}
+      <ShoppingCart className="w-3 h-3" />
+      {added ? "Ajouté ✓" : "Ajouter"}
     </button>
   );
 }

@@ -2,11 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/lib/db/schema";
 import AddToCartButton from "./AddToCartButton";
-import { Leaf } from "lucide-react";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="group bg-card border border-border rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+    <div className="group bg-card border border-border hover:border-gold transition-all duration-500"
+      style={{ borderColor: "var(--border)" }}>
       <Link href={"/product/" + product.id}>
         <div className="relative aspect-square overflow-hidden bg-secondary/30">
           <Image
@@ -17,29 +17,34 @@ export default function ProductCard({ product }: { product: Product }) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           {product.featured && (
-            <span className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1">
-              <Leaf className="w-3 h-3" />
-              Coup de cœur
+            <span className="absolute top-3 left-3 text-xs font-medium px-3 py-1.5 tracking-widest uppercase"
+              style={{ backgroundColor: "var(--gold)", color: "var(--foreground)" }}>
+              Sélection
             </span>
           )}
         </div>
       </Link>
 
       <div className="p-5">
-        <span className="text-xs text-primary font-medium uppercase tracking-wider">
+        <p className="text-xs tracking-[0.2em] uppercase font-medium mb-2"
+          style={{ color: "var(--gold)" }}>
           {product.category}
-        </span>
+        </p>
         <Link href={"/product/" + product.id}>
-          <h3 className="font-serif font-bold text-foreground mt-1 mb-2 hover:text-primary transition text-lg leading-tight">
+          <h3 className="font-serif text-xl font-bold text-foreground mb-2 hover:opacity-70 transition leading-tight"
+            style={{ fontFamily: "'Cormorant Garamond', serif" }}>
             {product.name}
           </h3>
         </Link>
-        <p className="text-sm text-muted-foreground line-clamp-2 mb-4 leading-relaxed">
+        <p className="text-xs text-muted-foreground line-clamp-2 mb-5 leading-relaxed font-light">
           {product.description}
         </p>
 
+        <div className="gold-divider mb-5" />
+
         <div className="flex items-center justify-between">
-          <span className="text-xl font-bold text-foreground">
+          <span className="font-serif text-2xl font-bold text-foreground"
+            style={{ fontFamily: "'Cormorant Garamond', serif" }}>
             {product.price.toFixed(2)} €
           </span>
           <AddToCartButton productId={product.id} />

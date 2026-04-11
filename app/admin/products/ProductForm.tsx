@@ -159,13 +159,13 @@ export default function ProductForm({ product }: { product?: Product }) {
           URL de l'image *
         </label>
         <input
-          type="url"
-          name="image"
-          required
-          defaultValue={product?.image}
-          placeholder="https://images.unsplash.com/..."
-          className={inputClass}
-          style={{ borderColor: "var(--border)" }}
+         type="text"
+         name="image"
+         required
+         defaultValue={product?.image}
+         placeholder="https://... ou /images/mon-image.jpg"
+         className={inputClass}
+         style={{ borderColor: "var(--border)" }}
         />
         {product?.image && (
           <div className="mt-2 relative w-24 h-24 border border-border overflow-hidden">

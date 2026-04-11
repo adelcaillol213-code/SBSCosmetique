@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { ShoppingCart, User, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import AdminButton from "./AdminButton";
 import ThemeToggle from "./ThemeToggle";
 
 function CartBadge() {
@@ -97,6 +98,7 @@ export default function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-3">
+            <AdminButton />
             <ThemeToggle />
             <CartBadge />
 

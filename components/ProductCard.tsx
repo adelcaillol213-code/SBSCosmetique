@@ -5,15 +5,15 @@ import AddToCartButton from "./AddToCartButton";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="group bg-card border border-border hover:border-gold transition-all duration-500"
+    <div className="card-hover group bg-card border border-border"
       style={{ borderColor: "var(--border)" }}>
       <Link href={"/product/" + product.id}>
-        <div className="relative aspect-square overflow-hidden bg-secondary/30">
+        <div className="img-zoom relative aspect-square bg-secondary/30">
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-700"
+            className="object-cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           {product.featured && (
@@ -31,7 +31,7 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.category}
         </p>
         <Link href={"/product/" + product.id}>
-          <h3 className="font-serif text-xl font-bold text-foreground mb-2 hover:opacity-70 transition leading-tight"
+          <h3 className="font-serif text-xl font-bold text-foreground mb-2 group-hover:opacity-70 transition-opacity leading-tight"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}>
             {product.name}
           </h3>
@@ -40,7 +40,7 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.description}
         </p>
 
-        <div className="gold-divider mb-5" />
+        <div className="gold-divider mb-5 transition-all duration-300 group-hover:opacity-100 opacity-50" />
 
         <div className="flex items-center justify-between">
           <span className="font-serif text-2xl font-bold text-foreground"

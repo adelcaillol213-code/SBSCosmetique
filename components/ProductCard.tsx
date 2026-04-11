@@ -7,17 +7,18 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <div className="card-hover group bg-card border border-border">
       <Link href={"/product/" + product.id}>
-        <div className="img-zoom relative aspect-square bg-secondary/30">
+        <div className="relative w-full overflow-hidden bg-secondary/30"
+          style={{ paddingBottom: "100%" }}>
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover"
+            className="object-contain p-4 group-hover:scale-105 transition-transform duration-700"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           {product.featured && (
             <span
-              className="absolute top-3 left-3 text-xs font-light px-3 py-1.5 tracking-widest uppercase"
+              className="absolute top-3 left-3 text-xs font-light px-3 py-1.5 tracking-widest uppercase z-10"
               style={{ backgroundColor: "var(--mint)", color: "var(--foreground)" }}
             >
               Signature
